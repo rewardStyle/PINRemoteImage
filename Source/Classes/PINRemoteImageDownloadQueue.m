@@ -150,7 +150,7 @@
                     break;
                     
                 default:
-                    NSAssert(NO, @"invalid priority: %lu", (unsigned long)priority);
+                    NSAssert(NO, @"invalid priority: %tu", priority);
                     break;
             }
             [queue addObject:downloadTask];
