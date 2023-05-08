@@ -7,14 +7,16 @@
 //
 
 import UIKit
+import PINRemoteImage
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        PINRemoteImageManager.shared().setProgressiveRendersMaxProgressiveRenderSize(CGSize.init(width: 2048, height: 2048), completion: nil)
         return true
     }
 
