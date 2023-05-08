@@ -6,11 +6,14 @@
 //  Copyright © 2016 Pinterest. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
-
-#import <pthread.h>
-
+#if SWIFT_PACKAGE
+@import PINOperation;
+#else
 #import <PINOperation/PINOperation.h>
+#endif
+
+#import <XCTest/XCTest.h>
+#import <pthread.h>
 
 static NSTimeInterval PINOperationGroupTestBlockTimeout = 20;
 
@@ -82,8 +85,13 @@ static NSTimeInterval PINOperationGroupTestBlockTimeout = 20;
       }
     }];
   }
-  
+  __block BOOL completionBlockCalled = NO;
+  [group setCompletion:^{
+    completionBlockCalled = YES;
+  }];
+
   [group waitUntilComplete];
+  XCTAssert(completionBlockCalled, @"Completion block should have been called after waiting.");
   
   @synchronized (self) {
     XCTAssert(operationsRun == 100, @"All operations should be run");
