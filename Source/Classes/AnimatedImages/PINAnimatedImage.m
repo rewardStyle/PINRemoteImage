@@ -27,7 +27,7 @@ const Float32 kPINAnimatedImageDefaultDuration = 0.1;
     static NSInteger maximumFramesPerSecond = 60;
     
     dispatch_once(&onceToken, ^{
-#if PIN_TARGET_IOS
+#if PIN_TARGET_IOS && !TARGET_OS_VISION
         if (@available(iOS 10.3, tvOS 10.3, *)) {
             maximumFramesPerSecond = 0;
             for (UIScreen *screen in [UIScreen screens]) {
